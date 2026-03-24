@@ -1,35 +1,68 @@
-# 🛡️ NATAN_CORREA_OS — Portfólio de Cybersecurity
+# 🛡️ Natan Dias Corrêa | Cybersecurity & GRC Portfolio
 
-Portfólio profissional de **Natan Dias Corrêa**, Analista de Sistemas em formação (UNINOVE), focado em **Segurança da Informação, Governança, Riscos e Compliance (GRC)**.
+> **NATAN_CORREA_OS v3.0** — Portfólio Profissional de Segurança da Informação
 
-## 🔐 Certificações
+## 🎯 Sobre
+
+Portfólio profissional desenvolvido sob os princípios de **Clean Code** e **Privacy by Design**, focado em demonstrar competências em **Governança, Riscos e Conformidade (GRC)**, Cibersegurança e Análise de Sistemas.
+
+## 🛠️ Tecnologias
+
+| Tecnologia | Uso |
+|---|---|
+| **React.js** | Framework SPA |
+| **TypeScript** | Tipagem estática |
+| **Tailwind CSS** | Design system e estilização |
+| **Lucide Icons** | Iconografia |
+| **Radix UI** | Componentes acessíveis |
+
+## 📐 Arquitetura
+
+```
+src/
+├── components/
+│   ├── Header.tsx             # [SEGMENTO_01] Barra de comando operacional
+│   ├── HeroSection.tsx        # [SEGMENTO_02] Central de operações
+│   ├── IdentitySection.tsx    # [SEGMENTO_02] Protocolo de identidade
+│   ├── ProjectsSection.tsx    # [SEGMENTO_03] Terminal de projetos
+│   ├── CredentialsSection.tsx # [SEGMENTO_04] Matriz de credenciais
+│   ├── SkillsMatrixSection.tsx# [SEGMENTO_05] Habilidades & compliance
+│   ├── ContactSection.tsx     # [SEGMENTO_06] Protocolo de contato
+│   ├── Footer.tsx             # [SEGMENTO_07] Rodapé profissional
+│   ├── EasterEgg.tsx          # [SEGMENTO_08] Camada de segurança interativa
+│   └── ScrollToTop.tsx        # Navegação auxiliar
+├── assets/                    # Imagens e recursos estáticos
+└── pages/
+    └── Index.tsx              # [SEGMENTO_00] Assembleia principal
+```
+
+## 🔐 Certificações Destacadas
 
 - **(ISC)² CC** — Certified in Cybersecurity
 - **Google Cybersecurity Professional**
-- **Segurança Operacional** — 1200h
-- **Técnico em Química** — 1200h (MEC)
+- **Formação de Vigilante** (1200h)
+- **Técnico em Química — MEC** (1200h)
+- **Azure & IoT** (Microsoft/Enap)
 
-## 🚀 Stack
+## 🚀 Deploy
 
-- React + TypeScript + Vite
-- Tailwind CSS (Dark Terminal Theme)
-- Lucide React Icons
-
-## 📦 Deploy
-
-Configurado para deploy em GitHub Pages:
+Hospedado via **GitHub Pages** em ambiente resiliente.
 
 ```bash
 npm run build
 ```
 
-Base path configurado para: `https://natan731-lab.github.io/natan731.github.io/`
+Base URL: `https://natan731-lab.github.io/natan731.github.io/`
 
-## 🎮 Easter Egg
+## 🥚 Easter Egg
 
-Digite **GRC** em qualquer lugar do site para uma surpresa.
+Digite **GRC** em qualquer lugar do site para ativar o **Modo Matrix** — uma varredura de segurança visual seguida de confirmação de conformidade.
 
 ## 📬 Contato
 
-- LinkedIn: [linkedin.com](https://linkedin.com)
-- GitHub: [github.com/natan731-lab](https://github.com/natan731-lab)
+- LinkedIn: [Natan Dias Corrêa](https://www.linkedin.com/in/natan-dias-corr%C3%AAa-04a724228/)
+- GitHub: [natan731-lab](https://github.com/natan731-lab)
+
+---
+
+> *"A segurança não é um produto, é um processo."* — Bruce Schneier
