@@ -39,6 +39,10 @@ const columns = [
   },
 ];
 
+const tools = [
+  "Linux", "Python", "SQL", "SIEM Tools", "IAM", "React", "PostgreSQL", "NIST", "ISO 27001", "LGPD"
+];
+
 const SkillBar = ({ skill, animate }: { skill: Skill; animate: boolean }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -55,7 +59,7 @@ const SkillBar = ({ skill, animate }: { skill: Skill; animate: boolean }) => {
             hovered ? "text-primary" : "text-muted-foreground/50"
           }`}
         >
-          STATUS: OTIMIZADO
+          {hovered ? "[SISTEMA_AUDITADO: NIVEL_PROFISSIONAL_DETECTADO]" : "STATUS: OTIMIZADO"}
         </span>
       </div>
       <div className="h-1.5 w-full rounded-full bg-border overflow-hidden">
@@ -123,6 +127,23 @@ const SkillsMatrixSection = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Tool Tags */}
+        <div className={`mt-10 transition-all duration-700 delay-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <h4 className="mb-4 text-[10px] uppercase tracking-widest text-muted-foreground text-center">
+            {">"} Stack de Ferramentas
+          </h4>
+          <div className="flex flex-wrap justify-center gap-2">
+            {tools.map((tool) => (
+              <span
+                key={tool}
+                className="rounded-md border border-primary/20 bg-primary/5 px-3 py-1.5 text-[10px] font-semibold tracking-widest text-primary transition-all hover:border-primary/50 hover:bg-primary/10 hover:shadow-[0_0_10px_hsl(142_71%_45%/0.15)] cursor-default"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
         </div>
 
         <p className="mt-8 text-center text-[11px] text-muted-foreground/60 tracking-wider">

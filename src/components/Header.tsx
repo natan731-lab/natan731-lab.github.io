@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const navItems = [
   { label: "SOBRE", href: "#sobre" },
@@ -68,6 +69,16 @@ const Header = () => {
               LIVE
             </span>
           </span>
+
+          {/* Profile mini avatar */}
+          <div className="hidden sm:block relative group">
+            <img
+              src={profilePhoto}
+              alt="Foto de Natan Dias Corrêa"
+              className="h-8 w-8 rounded-full object-cover border-2 border-border transition-all duration-300 group-hover:border-primary group-hover:shadow-[0_0_12px_hsl(142_71%_45%/0.4)]"
+            />
+          </div>
+
           <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-primary">
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

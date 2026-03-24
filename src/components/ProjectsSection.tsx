@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, Github, Terminal, ShieldCheck, Monitor, Music } from "lucide-react";
+import vibratoScreenshot from "@/assets/vibrato-digital-screenshot.png";
 
 const highlights = [
   { icon: ShieldCheck, label: "Proteção de Integridade de Dados" },
@@ -45,7 +46,7 @@ const ProjectsSection = () => {
             <span className="text-[10px] uppercase tracking-widest text-primary font-semibold">LIVE</span>
           </div>
 
-          {/* Matrix / particle hover effect overlay */}
+          {/* Matrix hover overlay */}
           <div
             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-[0.04]"
             style={{
@@ -80,7 +81,7 @@ const ProjectsSection = () => {
                 </p>
 
                 {/* Tech Highlights */}
-                <div className="mb-8 space-y-3">
+                <div className="mb-6 space-y-3">
                   {highlights.map((h) => {
                     const Icon = h.icon;
                     return (
@@ -91,6 +92,10 @@ const ProjectsSection = () => {
                     );
                   })}
                 </div>
+
+                <p className="mb-6 text-[10px] tracking-widest text-muted-foreground/60">
+                  [VERIFICAÇÃO: PROJETO_HOSPEDADO_VIA_GITHUB_PAGES]
+                </p>
 
                 {/* Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -104,7 +109,7 @@ const ProjectsSection = () => {
                     ACESSAR_SISTEMA_LIVE
                   </a>
                   <a
-                    href="https://github.com"
+                    href="https://github.com/natan731-lab"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 px-6 py-3 text-xs font-bold uppercase tracking-wider text-primary transition-all hover:bg-primary/10"
@@ -115,23 +120,25 @@ const ProjectsSection = () => {
                 </div>
               </div>
 
-              {/* Right: Terminal preview mockup */}
+              {/* Right: Browser mockup with real screenshot */}
               <div className="hidden lg:flex items-center justify-center">
-                <div className="w-full rounded-lg border border-border bg-background p-4">
-                  <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-border">
+                <div className="w-full rounded-lg border border-border bg-background overflow-hidden">
+                  {/* Browser bar */}
+                  <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-border bg-secondary/30">
                     <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
                     <span className="h-2.5 w-2.5 rounded-full" style={{ background: "hsl(45, 93%, 47%, 0.7)" }} />
                     <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
-                    <span className="ml-2 text-[9px] text-muted-foreground tracking-widest">vibrato-digital — bash</span>
+                    <span className="ml-3 text-[9px] text-muted-foreground tracking-widest flex-1 bg-background/50 rounded px-2 py-0.5 border border-border">
+                      natan731-lab.github.io/vibrato-digital-app/
+                    </span>
                   </div>
-                  <div className="font-mono text-[11px] leading-6 text-muted-foreground space-y-1">
-                    <p><span className="text-primary">$</span> npm run security-audit</p>
-                    <p className="text-card-foreground">✓ 0 vulnerabilities found</p>
-                    <p><span className="text-primary">$</span> npm run build</p>
-                    <p className="text-card-foreground">✓ Build completed in 2.3s</p>
-                    <p><span className="text-primary">$</span> deploy --target=gh-pages</p>
-                    <p className="text-primary">✓ Deployed successfully → LIVE</p>
-                    <p className="animate-blink text-primary">▊</p>
+                  {/* Screenshot with zoom on hover */}
+                  <div className="overflow-hidden">
+                    <img
+                      src={vibratoScreenshot}
+                      alt="Interface do App Vibrato Digital - Hinário digital para músicos"
+                      className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
                 </div>
               </div>

@@ -1,85 +1,41 @@
 import { useState, useEffect, useRef } from "react";
-import { ShieldCheck, Fingerprint, HardHat, FlaskConical, Cloud, Cpu, BookOpen, GraduationCap, Search } from "lucide-react";
+import { ShieldCheck, Fingerprint, HardHat, FlaskConical, Cloud, Search } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Progress } from "@/components/ui/progress";
 
-const tabs = [
+const cards = [
   {
-    id: "cyber",
-    label: "CYBERSECURITY & CLOUD",
-    items: [
-      {
-        icon: ShieldCheck,
-        title: "(ISC)² CC — Certified in Cybersecurity",
-        details: [
-          "Segurança de Rede",
-          "Resposta a Incidentes",
-          "Conceitos de Controle de Acesso",
-          "Operações de Segurança",
-          "Princípios de Segurança",
-        ],
-      },
-      {
-        icon: Fingerprint,
-        title: "Google Cybersecurity Professional",
-        details: [
-          "Ferramentas Linux & SQL",
-          "Python para Automação",
-          "SIEM (Detecção e Resposta)",
-          "Gestão de Vulnerabilidades",
-        ],
-      },
-      {
-        icon: Cloud,
-        title: "Microsoft Azure — Conceitos de Nuvem",
-        details: ["Infraestrutura Cloud", "Serviços de Computação e Rede"],
-      },
-    ],
+    icon: ShieldCheck,
+    title: "(ISC)² Certified in Cybersecurity (CC)",
+    desc: "Certificação internacional cobrindo os 5 domínios: Princípios de Segurança, Continuidade de Negócios, Controle de Acesso, Segurança de Rede e Operações de Segurança.",
   },
   {
-    id: "ops",
-    label: "SEGURANÇA OPERACIONAL",
-    items: [
-      {
-        icon: HardHat,
-        title: "Vigilante & Segurança Patrimonial (1200h)",
-        details: ["Proteção de Ativos", "Gestão de Riscos Físicos", "Controle de Acesso"],
-      },
-      {
-        icon: ShieldCheck,
-        title: "Segurança em Grandes Eventos & ANL",
-        details: ["Controle de Acesso", "Resposta a Crises", "Planejamento Operacional"],
-      },
-      {
-        icon: Cpu,
-        title: "IoT e Cidades Inteligentes (Enap)",
-        details: ["Privacidade em IoT", "Segurança de Dispositivos Conectados"],
-      },
-    ],
+    icon: Fingerprint,
+    title: "Google Cybersecurity Professional",
+    desc: "Análise de ameaças, monitoramento SIEM, ferramentas Linux e SQL, e automação de tarefas de segurança com Python.",
   },
   {
-    id: "tech",
-    label: "RIGOR TÉCNICO & COMPLIANCE",
-    items: [
-      {
-        icon: FlaskConical,
-        title: "Técnico em Química — MEC (1200h)",
-        details: ["Processos Laboratoriais", "Normas de Segurança", "Conformidade Rigorosa (ISO/ABNT)"],
-      },
-      {
-        icon: GraduationCap,
-        title: "ADS — Análise e Desenvolvimento de Sistemas",
-        details: ["Lógica de Programação", "Algoritmos", "Engenharia de Software"],
-      },
-    ],
+    icon: HardHat,
+    title: "Formação de Vigilante (1200h)",
+    desc: "Especialista em Proteção de Ativos, Gestão de Riscos Operacionais e Segurança de Grandes Eventos. Foco em disciplina e atenção ao detalhe.",
+  },
+  {
+    icon: FlaskConical,
+    title: "Técnico em Química — MEC (1200h)",
+    desc: "Formação focada em processos laboratoriais, conformidade com normas técnicas e segurança industrial (ISO/ABNT).",
+  },
+  {
+    icon: Cloud,
+    title: "Azure & IoT (Microsoft/Enap)",
+    desc: "Fundamentos de computação em nuvem e segurança em dispositivos conectados (IoT) para cidades inteligentes.",
   },
 ];
 
 const CredentialsSection = () => {
-  const [activeTab, setActiveTab] = useState("cyber");
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [careerProgress, setCareerProgress] = useState(0);
+  const [verifying, setVerifying] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,7 +51,13 @@ const CredentialsSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const currentTab = tabs.find((t) => t.id === activeTab)!;
+  const handleVerify = (idx: number) => {
+    setVerifying(idx);
+    setTimeout(() => {
+      setVerifying(null);
+      window.open("https://www.linkedin.com/in/natan-dias-corr%C3%AAa-04a724228/", "_blank", "noopener,noreferrer");
+    }, 1500);
+  };
 
   return (
     <section id="certificações" className="py-24 scroll-mt-20" ref={sectionRef}>
@@ -108,8 +70,8 @@ const CredentialsSection = () => {
           <span className="text-primary">$</span> gpg --verify credentials.sig
         </h2>
         <h3 className="mb-8 text-2xl sm:text-3xl font-bold text-card-foreground">
-          Dashboard de{" "}
-          <span className="text-primary text-glow">Auditoria de Conhecimento</span>
+          Matriz de{" "}
+          <span className="text-primary text-glow">Credenciais</span>
         </h3>
 
         {/* Career Progress Bar */}
@@ -123,32 +85,15 @@ const CredentialsSection = () => {
           <Progress value={careerProgress} className="h-2 bg-border" />
         </div>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-md text-[10px] uppercase tracking-widest font-semibold transition-all border ${
-                activeTab === tab.id
-                  ? "bg-primary/10 border-primary/40 text-primary shadow-[0_0_10px_hsl(142_71%_45%/0.15)]"
-                  : "border-border text-muted-foreground hover:border-primary/30 hover:text-primary"
-              }`}
-            >
-              [{tab.label}]
-            </button>
-          ))}
-        </div>
-
         {/* Cards Grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {currentTab.items.map((item, i) => {
-            const Icon = item.icon;
+          {cards.map((card, i) => {
+            const Icon = card.icon;
             return (
-              <Tooltip key={item.title}>
+              <Tooltip key={card.title}>
                 <TooltipTrigger asChild>
                   <div
-                    className={`group relative rounded-lg border border-border bg-card p-6 transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_25px_hsl(142_71%_45%/0.12)] cursor-default ${
+                    className={`group relative rounded-lg border border-border bg-card p-6 transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_25px_hsl(142_71%_45%/0.12)] ${
                       visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                     }`}
                     style={{ transitionDelay: visible ? `${i * 120}ms` : "0ms" }}
@@ -160,26 +105,26 @@ const CredentialsSection = () => {
                         <Icon size={20} className="text-primary" />
                       </div>
                       <h4 className="text-sm font-semibold text-card-foreground leading-tight">
-                        {item.title}
+                        {card.title}
                       </h4>
                     </div>
 
-                    <ul className="space-y-2">
-                      {item.details.map((detail) => (
-                        <li key={detail} className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <span className="text-primary text-[8px]">▸</span>
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="text-xs text-muted-foreground leading-relaxed mb-4">{card.desc}</p>
 
-                    {/* Mini audit badge */}
-                    <div className="mt-4 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Search size={10} className="text-primary" />
-                      <span className="text-[9px] uppercase tracking-widest text-primary/70">
-                        VALIDADO_POR_AUDITORIA
-                      </span>
-                    </div>
+                    {/* Verify button */}
+                    <button
+                      onClick={() => handleVerify(i)}
+                      disabled={verifying === i}
+                      className="flex items-center gap-1.5 text-[9px] uppercase tracking-widest text-primary/70 hover:text-primary transition-colors disabled:opacity-50"
+                    >
+                      <Search size={10} />
+                      {verifying === i ? "VALIDANDO_HASH..." : "VERIFICAR_HASH_CREDENTIAL"}
+                    </button>
+                    {verifying === i && (
+                      <div className="mt-2 h-1 w-full rounded-full bg-border overflow-hidden">
+                        <div className="h-full bg-primary rounded-full" style={{ animation: "loading 1.5s ease-out forwards" }} />
+                      </div>
+                    )}
                   </div>
                 </TooltipTrigger>
                 <TooltipContent
