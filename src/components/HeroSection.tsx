@@ -46,7 +46,7 @@ const HeroSection = () => {
             Acessar Portfólio GRC
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/natan731-lab"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-primary/50 px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/10"
