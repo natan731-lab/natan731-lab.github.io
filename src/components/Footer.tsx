@@ -1,16 +1,27 @@
+// [SEGMENTO_07]: FOOTER_PROFISSIONAL - SYSTEM_WATERMARK_ACTIVE
+import { useState, useEffect } from "react";
 import { Linkedin, Github } from "lucide-react";
 
 const Footer = () => {
+  const [latency, setLatency] = useState(42);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLatency(Math.floor(28 + Math.random() * 35));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <footer className="relative border-t border-border py-12">
       <div className="container mx-auto px-4 text-center">
         {/* Social Links */}
         <div className="mb-6 flex items-center justify-center gap-4">
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/natan-dias-corr%C3%AAa-04a724228/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            aria-label="LinkedIn de Natan Dias Corrêa"
             className="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_12px_hsl(142_71%_45%/0.2)]"
           >
             <Linkedin size={16} />
@@ -19,7 +30,7 @@ const Footer = () => {
             href="https://github.com/natan731-lab"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
+            aria-label="GitHub de Natan Dias Corrêa"
             className="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_12px_hsl(142_71%_45%/0.2)]"
           >
             <Github size={16} />
@@ -34,10 +45,13 @@ const Footer = () => {
           "A segurança não é um produto, é um processo." — Bruce Schneier
         </p>
 
-        {/* Watermark */}
-        <p className="text-[9px] tracking-widest text-muted-foreground/30 uppercase">
-          VER_SYSTEM: v3.0 // ENCRYPTED_CONNECTION: ACTIVE
-        </p>
+        {/* Dynamic latency + Watermark */}
+        <div className="flex items-center justify-center gap-4 text-[9px] tracking-widest text-muted-foreground/30 uppercase">
+          <span>VER_SYSTEM: v3.0 // ENCRYPTED_CONNECTION: ACTIVE</span>
+          <span className="text-primary/30">
+            LATÊNCIA_DA_CONEXÃO: {latency}ms
+          </span>
+        </div>
       </div>
     </footer>
   );

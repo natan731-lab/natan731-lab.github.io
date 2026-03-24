@@ -1,3 +1,4 @@
+// [SEGMENTO_00]: MAIN_LAYOUT - SYSTEM_ASSEMBLY_VERIFIED
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import IdentitySection from "@/components/IdentitySection";
@@ -11,8 +12,8 @@ import EasterEgg from "@/components/EasterEgg";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background animate-terminal-flicker">
-      {/* Scanlines overlay */}
+    <main className="min-h-screen bg-background animate-terminal-flicker">
+      {/* [OVERLAY]: Scanlines CRT Effect */}
       <div
         className="pointer-events-none fixed inset-0 z-40 opacity-[0.03]"
         style={{
@@ -31,7 +32,7 @@ const Index = () => {
       <Footer />
       <ScrollToTop />
       <EasterEgg />
-    </div>
+    </main>
   );
 };
 
