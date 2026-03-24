@@ -6,6 +6,8 @@ import ProjectsSection from "@/components/ProjectsSection";
 import SkillsMatrixSection from "@/components/SkillsMatrixSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+import EasterEgg from "@/components/EasterEgg";
 
 const Index = () => {
   return (
@@ -27,6 +29,8 @@ const Index = () => {
       <SkillsMatrixSection />
       <ContactSection />
       <Footer />
+      <ScrollToTop />
+      <EasterEgg />
     </div>
   );
 };
