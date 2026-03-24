@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Radar } from "lucide-react";
+import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const attributes = [
   { emoji: "🛡️", label: "Disciplina Operacional (Ex-Vigilante)" },
@@ -45,8 +46,8 @@ const IdentitySection = () => {
               <span className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-primary" />
               <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary" />
 
-              {/* Inner frame */}
-              <div className="absolute inset-4 rounded-md border border-border bg-card overflow-hidden flex items-center justify-center">
+              {/* Inner frame with real photo */}
+              <div className="absolute inset-4 rounded-md border border-border bg-card overflow-hidden">
                 {/* Scanline overlay */}
                 <div
                   className="pointer-events-none absolute inset-0 z-10 opacity-[0.08]"
@@ -58,13 +59,11 @@ const IdentitySection = () => {
                 {/* Green tint overlay */}
                 <div className="pointer-events-none absolute inset-0 z-10 bg-primary/5" />
 
-                {/* Placeholder */}
-                <div className="flex flex-col items-center gap-3 text-muted-foreground">
-                  <div className="h-20 w-20 rounded-full border-2 border-dashed border-primary/30 flex items-center justify-center">
-                    <span className="text-4xl">🛡️</span>
-                  </div>
-                  <span className="text-[10px] uppercase tracking-widest">Foto do Operador</span>
-                </div>
+                <img
+                  src={profilePhoto}
+                  alt="Foto de Natan Dias Corrêa em Data Center"
+                  className="h-full w-full object-cover"
+                />
               </div>
 
               {/* Crosshair center lines */}
