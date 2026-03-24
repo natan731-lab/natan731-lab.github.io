@@ -1,9 +1,42 @@
+// [SEGMENTO_06]: PROTOCOLO_DE_CONTATO - COMMUNICATION_CHANNELS_ACTIVE
 import { useState, FormEvent, useEffect, useRef } from "react";
-import { Send } from "lucide-react";
+import { Send, Linkedin, Github, Mail, Phone, Copy, Check } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+
+const channels = [
+  {
+    icon: Linkedin,
+    label: "CONECTAR_VIA_LINKEDIN",
+    href: "https://www.linkedin.com/in/natan-correa-sec",
+    external: true,
+  },
+  {
+    icon: Github,
+    label: "INSPECIONAR_REPOSITORIOS",
+    href: "https://github.com/natan731-lab",
+    external: true,
+  },
+  {
+    icon: Mail,
+    label: "natan.correa.sec@gmail.com",
+    href: "mailto:natan.correa.sec@gmail.com",
+    copyable: "natan.correa.sec@gmail.com",
+    external: false,
+  },
+  {
+    icon: Phone,
+    label: "ESTABELECER_LINHA_DIRETA_WHATSAPP",
+    href: "https://wa.me/5511984251642",
+    copyable: "+55 11 98425-1642",
+    external: true,
+    isWhatsApp: true,
+  },
+];
 
 const ContactSection = () => {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -26,10 +59,21 @@ const ContactSection = () => {
     }, 1800);
   };
 
+  const handleCopy = (text: string, idx: number) => {
+    navigator.clipboard.writeText(text);
+    setCopiedIdx(idx);
+    toast({
+      title: "📋 DADO_COPIADO_PARA_TRANSFERENCIA",
+      description: text,
+      duration: 2000,
+    });
+    setTimeout(() => setCopiedIdx(null), 2000);
+  };
+
   return (
     <section id="contato" className="py-24 scroll-mt-20" ref={sectionRef}>
       <div
-        className={`container mx-auto px-4 max-w-2xl transition-all duration-1000 ${
+        className={`container mx-auto px-4 max-w-3xl transition-all duration-1000 ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
@@ -40,8 +84,46 @@ const ContactSection = () => {
           Protocolo de <span className="text-primary text-glow">Contato</span>
         </h3>
 
+        {/* Matriz de Conexão */}
+        <div className="mb-12 grid gap-4 sm:grid-cols-2">
+          {channels.map((ch, i) => {
+            const Icon = ch.icon;
+            return (
+              <div key={ch.label} className="flex items-center gap-2">
+                <a
+                  href={ch.href}
+                  target={ch.external ? "_blank" : undefined}
+                  rel={ch.external ? "noopener noreferrer" : undefined}
+                  className={`group flex-1 flex items-center gap-3 rounded-md border border-border bg-card px-4 py-3.5 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_20px_hsl(142_71%_45%/0.15)] ${
+                    ch.isWhatsApp ? "hover:bg-primary/10" : ""
+                  }`}
+                >
+                  <div className={`flex h-9 w-9 items-center justify-center rounded-md transition-colors ${
+                    ch.isWhatsApp ? "bg-primary/20 text-primary" : "bg-primary/10 text-primary"
+                  } group-hover:bg-primary/25`}>
+                    <Icon size={18} />
+                  </div>
+                  <span className="text-[11px] font-semibold uppercase tracking-widest text-card-foreground group-hover:text-primary transition-colors">
+                    {ch.label}
+                  </span>
+                </a>
+                {ch.copyable && (
+                  <button
+                    onClick={() => handleCopy(ch.copyable!, i)}
+                    className="flex h-10 w-10 items-center justify-center rounded-md border border-border text-muted-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_10px_hsl(142_71%_45%/0.2)]"
+                    aria-label={`Copiar ${ch.copyable}`}
+                    title="Copiar"
+                  >
+                    {copiedIdx === i ? <Check size={14} className="text-primary" /> : <Copy size={14} />}
+                  </button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Formulário */}
         <div className="rounded-lg border border-dashed border-border bg-card p-6 sm:p-8">
-          {/* Terminal bar */}
           <div className="mb-6 flex items-center gap-2 border-b border-border pb-4">
             <span className="text-[10px] tracking-widest text-primary uppercase font-semibold">
               [INICIAR_PROTOCOLO_DE_COMUNICACAO]
@@ -86,14 +168,12 @@ const ContactSection = () => {
               />
             </div>
 
-            {/* Loading bar */}
             {sending && (
               <div className="h-1 w-full overflow-hidden rounded-full bg-border">
                 <div className="h-full animate-[loading_1.5s_ease-in-out] bg-primary rounded-full" />
               </div>
             )}
 
-            {/* Success message */}
             {sent && (
               <div className="rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-center">
                 <p className="text-xs uppercase tracking-widest text-primary font-semibold">

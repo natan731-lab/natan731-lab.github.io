@@ -1,6 +1,6 @@
 // [SEGMENTO_01]: HEADER_OPERACIONAL - COMMAND_CENTER_VERIFIED
 import { useState, useEffect } from "react";
-import { Menu, X, ShieldAlert } from "lucide-react";
+import { Menu, X, ShieldAlert, FileDown } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const navItems = [
@@ -11,13 +11,15 @@ const navItems = [
   { label: "CONTATO", href: "#contato" },
 ];
 
-const fullTitle = "🛡️ NATAN_CORREA_OS";
+const fullTitle = "🛡️ NATAN_DIAS_CORRÊA_OS";
+const cvLink = "https://drive.google.com/file/d/16P3WW8aUhgjFZ0G9_0eu-4XoQhJCtjKC/view?usp=drive_link";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [displayedTitle, setDisplayedTitle] = useState("");
   const [typingDone, setTypingDone] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
+  const [cvHover, setCvHover] = useState(false);
 
   useEffect(() => {
     let i = 0;
@@ -67,9 +69,22 @@ const Header = () => {
         </nav>
 
         {/* Right */}
-        <div className="flex items-center gap-3">
-          <span className="hidden sm:flex items-center gap-2 text-[11px] text-muted-foreground">
-            SISTEMA OPERACIONAL:{" "}
+        <div className="flex items-center gap-2">
+          {/* CV Download Button */}
+          <a
+            href={cvLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={() => setCvHover(true)}
+            onMouseLeave={() => setCvHover(false)}
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-md border border-primary/40 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_15px_hsl(142_71%_45%/0.3)]"
+          >
+            <FileDown size={12} />
+            {cvHover ? "DOWNLOAD_INICIADO" : "EXPORTAR_CV_PDF"}
+          </a>
+
+          <span className="hidden lg:flex items-center gap-2 text-[11px] text-muted-foreground">
+            SISTEMA:{" "}
             <span className="flex items-center gap-1.5 text-primary font-semibold">
               <span className="inline-block h-2 w-2 rounded-full bg-primary animate-blink" />
               LIVE
@@ -115,6 +130,15 @@ const Header = () => {
               {">"} [{item.label}]
             </a>
           ))}
+          <a
+            href={cvLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs uppercase tracking-widest text-primary hover:text-primary/80"
+          >
+            <FileDown size={14} />
+            EXPORTAR_CV_PDF
+          </a>
         </nav>
       )}
     </header>

@@ -1,5 +1,6 @@
+// [SEGMENTO_02]: PROTOCOLO_DE_IDENTIDADE - DOSSIER_DECLASSIFIED
 import { useEffect, useRef, useState } from "react";
-import { Radar } from "lucide-react";
+import { Radar, FileDown } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const attributes = [
@@ -9,9 +10,12 @@ const attributes = [
   { emoji: "🎯", label: "Mentalidade 'Sonho Grande'" },
 ];
 
+const cvLink = "https://drive.google.com/file/d/16P3WW8aUhgjFZ0G9_0eu-4XoQhJCtjKC/view?usp=drive_link";
+
 const IdentitySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [cvHover, setCvHover] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,17 +42,14 @@ const IdentitySection = () => {
 
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           {/* Left: Photo with crosshair frame */}
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center gap-6">
             <div className="relative w-72 h-80 sm:w-80 sm:h-96">
-              {/* Crosshair corners */}
               <span className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary" />
               <span className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary" />
               <span className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-primary" />
               <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary" />
 
-              {/* Inner frame with real photo */}
               <div className="absolute inset-4 rounded-md border border-border bg-card overflow-hidden">
-                {/* Scanline overlay */}
                 <div
                   className="pointer-events-none absolute inset-0 z-10 opacity-[0.08]"
                   style={{
@@ -56,9 +57,7 @@ const IdentitySection = () => {
                       "repeating-linear-gradient(0deg, hsl(142 71% 45%) 0px, transparent 1px, transparent 3px)",
                   }}
                 />
-                {/* Green tint overlay */}
                 <div className="pointer-events-none absolute inset-0 z-10 bg-primary/5" />
-
                 <img
                   src={profilePhoto}
                   alt="Foto de Natan Dias Corrêa em Data Center"
@@ -66,11 +65,9 @@ const IdentitySection = () => {
                 />
               </div>
 
-              {/* Crosshair center lines */}
               <div className="absolute top-1/2 left-0 right-0 h-px bg-primary/10" />
               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-primary/10" />
 
-              {/* Corner labels */}
               <span className="absolute -bottom-6 left-4 text-[9px] tracking-widest text-muted-foreground">
                 SCAN: ACTIVE
               </span>
@@ -78,12 +75,25 @@ const IdentitySection = () => {
                 ID: CONFIRMED
               </span>
             </div>
+
+            {/* CV Download below photo */}
+            <a
+              href={cvLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={() => setCvHover(true)}
+              onMouseLeave={() => setCvHover(false)}
+              className="mt-4 inline-flex items-center gap-2 rounded-md border border-primary/40 bg-background px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_20px_hsl(142_71%_45%/0.3)]"
+            >
+              <FileDown size={14} />
+              {cvHover ? "DOWNLOAD_INICIADO" : "EXPORTAR_RELATORIO_CV_PDF"}
+            </a>
           </div>
 
           {/* Right: Bio */}
           <div>
             <h4 className="mb-6 text-lg font-bold text-primary text-glow tracking-wider">
-              [ID: NATAN_CORREA]
+              [ID: NATAN_DIAS_CORRÊA]
             </h4>
 
             <p className="mb-5 text-sm leading-relaxed text-card-foreground">
@@ -101,7 +111,6 @@ const IdentitySection = () => {
               pessoas e tecnologia operem em total conformidade e segurança.
             </p>
 
-            {/* Operator Attributes */}
             <h5 className="mb-4 text-[10px] uppercase tracking-widest text-muted-foreground">
               {">"} Atributos de Operador
             </h5>
