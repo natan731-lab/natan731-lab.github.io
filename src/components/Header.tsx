@@ -1,5 +1,6 @@
+// [SEGMENTO_01]: HEADER_OPERACIONAL - COMMAND_CENTER_VERIFIED
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShieldAlert } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const navItems = [
@@ -16,6 +17,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [displayedTitle, setDisplayedTitle] = useState("");
   const [typingDone, setTypingDone] = useState(false);
+  const [highContrast, setHighContrast] = useState(false);
 
   useEffect(() => {
     let i = 0;
@@ -29,6 +31,10 @@ const Header = () => {
     }, 60);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("high-contrast", highContrast);
+  }, [highContrast]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
@@ -70,11 +76,22 @@ const Header = () => {
             </span>
           </span>
 
+          {/* High Contrast Toggle */}
+          <button
+            onClick={() => setHighContrast(!highContrast)}
+            className="hidden sm:flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground transition-all hover:border-primary/40 hover:text-primary hover:shadow-[0_0_10px_hsl(142_71%_45%/0.2)]"
+            aria-label="Alternar modo de alto contraste"
+            title="Modo de Emergência"
+          >
+            <ShieldAlert size={14} />
+          </button>
+
           {/* Profile mini avatar */}
           <div className="hidden sm:block relative group">
             <img
               src={profilePhoto}
               alt="Foto de Natan Dias Corrêa"
+              loading="lazy"
               className="h-8 w-8 rounded-full object-cover border-2 border-border transition-all duration-300 group-hover:border-primary group-hover:shadow-[0_0_12px_hsl(142_71%_45%/0.4)]"
             />
           </div>

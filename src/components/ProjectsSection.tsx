@@ -1,3 +1,4 @@
+// [SEGMENTO_03]: TERMINAL_DE_PROJETOS - VIBRATO_DIGITAL_LIVE
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, Github, Terminal, ShieldCheck, Monitor, Music } from "lucide-react";
 import vibratoScreenshot from "@/assets/vibrato-digital-screenshot.png";
@@ -11,6 +12,7 @@ const highlights = [
 const ProjectsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [githubHover, setGithubHover] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,7 +36,7 @@ const ProjectsSection = () => {
         {/* Vibrato Digital Full-Width Card */}
         <div
           className={`group relative rounded-lg border border-primary/30 bg-card overflow-hidden transition-all duration-700 ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
           }`}
         >
           {/* Pulsing glow indicator */}
@@ -71,7 +73,7 @@ const ProjectsSection = () => {
                   Vibrato <span className="text-primary text-glow">Digital</span>
                 </h4>
                 <p className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">
-                  Produtividade & Segurança Musical
+                  Tecnologia e Segurança para a Música
                 </p>
                 <p className="mb-6 mt-4 text-sm leading-relaxed text-muted-foreground">
                   Aplicação desenvolvida para músicos, focada em organização operacional e
@@ -106,16 +108,18 @@ const ProjectsSection = () => {
                     className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_25px_hsl(142_71%_45%/0.4)]"
                   >
                     <ExternalLink size={14} />
-                    ACESSAR_SISTEMA_LIVE
+                    ESTABELECER_CONEXÃO_LIVE
                   </a>
                   <a
-                    href="https://github.com/natan731-lab"
+                    href="https://github.com/natan731-lab/vibrato-digital-app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 px-6 py-3 text-xs font-bold uppercase tracking-wider text-primary transition-all hover:bg-primary/10"
+                    onMouseEnter={() => setGithubHover(true)}
+                    onMouseLeave={() => setGithubHover(false)}
+                    className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 px-6 py-3 text-xs font-bold uppercase tracking-wider text-primary transition-all hover:bg-primary/10 hover:shadow-[0_0_15px_hsl(142_71%_45%/0.2)]"
                   >
                     <Github size={14} />
-                    INSPECIONAR_CÓDIGO_FONTE
+                    {githubHover ? "VER_REPOSITÓRIO_GITHUB" : "INSPECIONAR_CÓDIGO_FONTE"}
                   </a>
                 </div>
               </div>
@@ -137,6 +141,7 @@ const ProjectsSection = () => {
                     <img
                       src={vibratoScreenshot}
                       alt="Interface do App Vibrato Digital - Hinário digital para músicos"
+                      loading="lazy"
                       className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
